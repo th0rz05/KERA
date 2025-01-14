@@ -672,8 +672,9 @@ async def handle_mempool_msg(msg_dict):
             if res.fetchone() is None:
                 await broadcast_msg(mk_getobject_msg(txid))
             else: # try to add it to the mempool
-                tx_str = res.fetchone()[0]
-                tx_dict = objects.expand_object(tx_str)
+                res = cur.execute("SELECT obj FROM objects WHERE oid = ?", (txid,))
+                tx_str = res.fetchone()
+                tx_dict = objects.expand_object(tx_str[0])
                 MEMPOOL.try_add_tx(tx_dict)
         finally:
             con.close()

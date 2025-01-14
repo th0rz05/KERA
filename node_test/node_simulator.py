@@ -51,15 +51,12 @@ async def send_messages(writer):
             }
         elif choice == "2":
             response = {
-                "type": "getpeers",
+                "type": "getmempool",
             }
         elif choice == "3":
             response = {
-                "type": "peers",
-                "peers": [
-                    "192.169.5.3:18018",
-                    "192.168.1.5:18018"
-                ]
+                "type": "mempool",
+                "txids": ["e565db393706f79608dfb0e1f7129ae0765b5e3b08e89cf868098b27af49e187"]
             }
         elif choice == "4":
             response = {
